@@ -53,3 +53,22 @@ class Profile(models.Model):
         
     def __str__(self):
         return self.full_name
+
+
+class Event(models.Model):
+    EVENT_CHOICES = [
+        ('PHONE_CALL', 'Phone Call'),
+        ('INTERVIEW', 'Interview'),
+        ('EMAIL', 'Email'),
+    ]
+    job_application = models.ForeignKey('JobApplication', on_delete=models.CASCADE, related_name='events')
+    event_type = models.CharField(max_length=100, choices=EVENT_CHOICES, null=True)
+    event_name = models.TextField(blank=True, null=True)
+    start_time = models.DateTimeField(blank=True)
+    end_time = models.DateTimeField(blank=True)
+    attendants = models.ManyToManyField('Profile', related_name='events', blank=True)
+    notes = models.TextField(blank=True)
+    next_steps = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.event_name} - {self.job_application}"
