@@ -16,7 +16,13 @@ class EventInline(admin.StackedInline):
 class JobApplicationAdmin(admin.ModelAdmin):
     list_filter = ['status']
     inlines = [AttachmentInline, EventInline]
-    list_display = ('title', 'company', 'status', 'date_applied')
+    list_display = ('title', 'company', 'status', 'date_applied','get_events' )
+
+    def get_events(self, obj):
+        return len([event.event_name for event in obj.events.all()])
+
+    get_events.short_description = 'Events'
+
 
 
 @admin.register(Company)
