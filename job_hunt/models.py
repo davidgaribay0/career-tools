@@ -5,6 +5,9 @@ class Company(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     website_url = models.URLField(blank=True)
+    industry = models.TextField(blank=True)
+    careers_page_url = models.URLField(blank=True)
+    notes = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
@@ -29,7 +32,6 @@ class JobApplication(models.Model):
     remote = models.BooleanField(blank=True, default=False, null=True)
     date_applied = models.DateField(blank=True, null=True)
 
-
     def __str__(self):
         return self.title
 
@@ -50,7 +52,8 @@ class Profile(models.Model):
     resume = models.FileField(upload_to='attachments/', blank=True)
     cover_letter = models.FileField(upload_to='attachments/', blank=True)
     email = models.EmailField(blank=True, null=True)
-        
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
+    
     def __str__(self):
         return self.full_name
 
@@ -61,7 +64,6 @@ class Event(models.Model):
         ('INTERVIEW', 'Interview'),
         ('EMAIL', 'Email'),
     ]
-
     job_application = models.ForeignKey('JobApplication', on_delete=models.CASCADE, related_name='events')
     event_type = models.CharField(max_length=100, choices=EVENT_CHOICES, null=True)
     event_name = models.TextField(blank=True, null=True)
