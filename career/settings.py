@@ -137,7 +137,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
     "welcome_sign": "Welcome!",
     "copyright": "Career Tools",
-    "search_model": ["job_hunt.jobapplication"],
+    "search_model": ["job_hunt.JobApplication"],
     "user_avatar": None,
     "topmenu_links": [
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
