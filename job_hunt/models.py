@@ -1,12 +1,15 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Company(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
+    phone_number = PhoneNumberField(blank=True, region='US')
+    address = models.CharField(blank=True, max_length=300, null=True)
     website_url = models.URLField(blank=True)
-    industry = models.TextField(blank=True)
     careers_page_url = models.URLField(blank=True)
+    industry = models.CharField(blank=True, max_length=300, null=True)
+    description = models.TextField(blank=True)
     notes = models.TextField(blank=True)
 
     def __str__(self):
@@ -24,11 +27,11 @@ class JobApplication(models.Model):
         ('OFFER_ACCEPTED', 'Offer accepted'),
     )
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    url=models.URLField(blank=True)
+    url = models.URLField(blank=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
     status = models.CharField(max_length=100, choices=STATUS, null=True, blank=True)
-    notes=models.TextField(blank=True)
+    notes = models.TextField(blank=True)
     remote = models.BooleanField(blank=True, default=False, null=True)
     date_applied = models.DateField(blank=True, null=True)
 
@@ -42,18 +45,19 @@ class Attachment(models.Model):
 
     def __str__(self):
         return self.file.name
-    
+
 
 class Profile(models.Model):
     full_name = models.CharField(max_length=100, blank=True)
     github_url = models.URLField(blank=True)
-    linkedin_url =models.URLField(blank=True)
+    linkedin_url = models.URLField(blank=True)
     portfolio_url = models.URLField(blank=True)
     resume = models.FileField(upload_to='attachments/', blank=True)
     cover_letter = models.FileField(upload_to='attachments/', blank=True)
     email = models.EmailField(blank=True, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
-    
+    phone_number = PhoneNumberField(blank=True, region='US')
+
     def __str__(self):
         return self.full_name
 
@@ -67,7 +71,7 @@ class Event(models.Model):
     job_application = models.ForeignKey('JobApplication', on_delete=models.CASCADE, related_name='events')
     event_type = models.CharField(max_length=100, choices=EVENT_CHOICES, null=True)
     event_name = models.TextField(blank=True, null=True)
-    start_time = models.DateTimeField(blank=True, null= True)
+    start_time = models.DateTimeField(blank=True, null=True)
     end_time = models.DateTimeField(blank=True, null=True)
     attendants = models.ManyToManyField('Profile', related_name='events', blank=True)
     notes = models.TextField(blank=True)

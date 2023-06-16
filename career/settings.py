@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'job_hunt'
+    'job_hunt',
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
