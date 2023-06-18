@@ -22,7 +22,7 @@ class JobApplication(models.Model):
         ('BACKLOG', 'Backlog'),
         ('DENIED', 'Denied'),
         ('INTERVIEW', 'Interview'),
-        ('OFFER_RECIEVED', 'Offer recieved'),
+        ('OFFER_RECEIVED', 'Offer received'),
         ('OFFER_REJECTED', 'Offer rejected'),
         ('OFFER_ACCEPTED', 'Offer accepted'),
     )
