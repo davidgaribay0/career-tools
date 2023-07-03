@@ -9,13 +9,6 @@
 - This way I can stay organized, do research on companies, write down notes, and put my best foot forward when applying to positions. 
 - All data entered stays private on your computer.
 
-
-## Why?
-
-- Unfortunately in my previous two roles, I have been impacted by a reduction in force due to the macroeconomic environment. 
-- I'm not a huge fan of using excel to track job application statuses.
-- I enjoy coding!
-
 ## Requirements 
 - python 3.11 (https://www.python.org)
 
